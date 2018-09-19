@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- UserInfo -->
+<mapper namespace="com.whd.news.user.mapper.UserInfoMapper">
+
+	<resultMap id="UserInfo" type="com.whd.news.user.bean.UserInfo">
+        <result property="id" column="ID"/>
+        <result property="name" column="NAME"/>
+        <result property="sex" column="SEX"/>
+        <result property="phone" column="PHONE"/>
+        <result property="emile" column="EMILE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="competence" column="COMPETENCE"/>
+	</resultMap>
+
+    <sql id="where">
+	<trim prefix="WHERE" prefixOverrides="AND|OR"> 
+	       <if test="id != null and id != ''">
+				AND ID = #{id}
+		   </if>
+	       <if test="name != null and name != ''">
+				AND NAME = #{name}
+		   </if>
+	       <if test="sex != null">
+				AND SEX = #{sex}
+			</if>
+	       <if test="phone != null and phone != ''">
+				AND PHONE = #{phone}
+		   </if>
+	       <if test="emile != null and emile != ''">
+				AND EMILE = #{emile}
+		   </if>
+	       <if test="address != null and address != ''">
+				AND ADDRESS = #{address}
+		   </if>
+	       <if test="competence != null">
+				AND COMPETENCE = #{competence}
+			</if>
+	</trim>
+    </sql>
+    <sql id="Base_Column_List" >
+	        ID id ,
+	        NAME name ,
+	        SEX sex ,
+	        PHONE phone ,
+	        EMILE emile ,
+	        ADDRESS address ,
+	        COMPETENCE competence 
+    </sql>
+    <select id="selectOne" resultType="com.whd.news.user.bean.UserInfo"  parameterType="com.whd.news.user.bean.UserInfo" >
+        select
+        <include refid="Base_Column_List" />
+        from  USER_INFO 
+        <include refid="where"></include> 
+    </select>
+    <select id="selectAll" resultType="com.whd.news.user.bean.UserInfo">
+        SELECT
+        <include refid="Base_Column_List" />
+        from USER_INFO
+        <include refid="where"></include>
+    </select>
+    <insert id="insert" parameterType="com.whd.news.user.bean.UserInfo">
+        insert into USER_INFO (
+		<trim suffixOverrides=",">  
+				<if test="id != null and id != '' ">
+					ID ,
+				</if>
+				<if test="name != null and name != '' ">
+					NAME ,
+				</if>
+				<if test="sex != null">
+					SEX ,
+				</if>
+				<if test="phone != null and phone != '' ">
+					PHONE ,
+				</if>
+				<if test="emile != null and emile != '' ">
+					EMILE ,
+				</if>
+				<if test="address != null and address != '' ">
+					ADDRESS ,
+				</if>
+				<if test="competence != null">
+					COMPETENCE 
+				</if>
+		</trim>
+        ) VALUES (
+		<trim suffixOverrides=",">  
+				<if test="id != null and id != '' ">
+					#{id} ,
+				</if>
+				<if test="name != null and name != '' ">
+					#{name} ,
+				</if>
+				<if test="sex != null">
+					#{sex} ,
+				</if>
+				<if test="phone != null and phone != '' ">
+					#{phone} ,
+				</if>
+				<if test="emile != null and emile != '' ">
+					#{emile} ,
+				</if>
+				<if test="address != null and address != '' ">
+					#{address} ,
+				</if>
+				<if test="competence != null">
+					#{competence} 
+				</if>
+		</trim>
+        )
+    </insert>
+    <update id="update" parameterType="com.whd.news.user.bean.UserInfo" >
+        UPDATE USER_INFO 
+		<set>
+				<if test="name != null and name != '' ">
+					NAME = #{name} ,
+				</if>
+			
+				<if test="sex != null">
+					SEX = #{sex} ,
+				</if>
+			
+				<if test="phone != null and phone != '' ">
+					PHONE = #{phone} ,
+				</if>
+			
+				<if test="emile != null and emile != '' ">
+					EMILE = #{emile} ,
+				</if>
+			
+				<if test="address != null and address != '' ">
+					ADDRESS = #{address} ,
+				</if>
+			
+				<if test="competence != null">
+					COMPETENCE = #{competence} 
+				</if>
+			
+		</set>
+        WHERE 
+	        ID = #{id} 
+    </update>
+
+
+    <delete id="deleteByPK" parameterType="com.whd.news.user.bean.UserInfo" >
+        DELETE FROM USER_INFO WHERE
+	        ID = #{id} 
+    </delete>
+
+  	
+</mapper>

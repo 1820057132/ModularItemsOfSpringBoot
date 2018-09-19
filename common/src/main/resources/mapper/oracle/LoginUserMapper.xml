@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- LoginUser -->
+<mapper namespace="com.whd.news.user.mapper.LoginUserMapper">
+
+	<resultMap id="LoginUser" type="com.whd.news.user.bean.LoginUser">
+        <result property="id" column="ID"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="isRemoved" column="IS_REMOVED"/>
+        <result property="phone" column="PHONE"/>
+        <result property="loginName" column="LOGIN_NAME"/>
+	</resultMap>
+
+    <sql id="where">
+	<trim prefix="WHERE" prefixOverrides="AND|OR"> 
+	       <if test="id != null and id != ''">
+				AND ID = #{id}
+		   </if>
+	       <if test="password != null and password != ''">
+				AND PASSWORD = #{password}
+		   </if>
+	       <if test="userName != null and userName != ''">
+				AND USER_NAME = #{userName}
+		   </if>
+	       <if test="userId != null and userId != ''">
+				AND USER_ID = #{userId}
+		   </if>
+	       <if test="isRemoved != null">
+				AND IS_REMOVED = #{isRemoved}
+			</if>
+	       <if test="phone != null and phone != ''">
+				AND PHONE = #{phone}
+		   </if>
+	       <if test="loginName != null and loginName != ''">
+				AND LOGIN_NAME = #{loginName}
+		   </if>
+	</trim>
+    </sql>
+    <sql id="Base_Column_List" >
+	        ID id ,
+	        PASSWORD password ,
+	        USER_NAME userName ,
+	        USER_ID userId ,
+	        IS_REMOVED isRemoved ,
+	        PHONE phone ,
+	        LOGIN_NAME loginName 
+    </sql>
+    <select id="selectOne" resultType="com.whd.news.user.bean.LoginUser"  parameterType="com.whd.news.user.bean.LoginUser" >
+        select
+        <include refid="Base_Column_List" />
+        from  LOGIN_USER 
+        <include refid="where"></include> 
+    </select>
+    <select id="selectAll" resultType="com.whd.news.user.bean.LoginUser">
+        SELECT
+        <include refid="Base_Column_List" />
+        from LOGIN_USER
+        <include refid="where"></include>
+    </select>
+    <insert id="insert" parameterType="com.whd.news.user.bean.LoginUser">
+        insert into LOGIN_USER (
+		<trim suffixOverrides=",">  
+				<if test="id != null and id != '' ">
+					ID ,
+				</if>
+				<if test="password != null and password != '' ">
+					PASSWORD ,
+				</if>
+				<if test="userName != null and userName != '' ">
+					USER_NAME ,
+				</if>
+				<if test="userId != null and userId != '' ">
+					USER_ID ,
+				</if>
+				<if test="isRemoved != null">
+					IS_REMOVED ,
+				</if>
+				<if test="phone != null and phone != '' ">
+					PHONE ,
+				</if>
+				<if test="loginName != null and loginName != '' ">
+					LOGIN_NAME 
+				</if>
+		</trim>
+        ) VALUES (
+		<trim suffixOverrides=",">  
+				<if test="id != null and id != '' ">
+					#{id} ,
+				</if>
+				<if test="password != null and password != '' ">
+					#{password} ,
+				</if>
+				<if test="userName != null and userName != '' ">
+					#{userName} ,
+				</if>
+				<if test="userId != null and userId != '' ">
+					#{userId} ,
+				</if>
+				<if test="isRemoved != null">
+					#{isRemoved} ,
+				</if>
+				<if test="phone != null and phone != '' ">
+					#{phone} ,
+				</if>
+				<if test="loginName != null and loginName != '' ">
+					#{loginName} 
+				</if>
+		</trim>
+        )
+    </insert>
+    <update id="update" parameterType="com.whd.news.user.bean.LoginUser" >
+        UPDATE LOGIN_USER 
+		<set>
+				<if test="password != null and password != '' ">
+					PASSWORD = #{password} ,
+				</if>
+			
+				<if test="userName != null and userName != '' ">
+					USER_NAME = #{userName} ,
+				</if>
+			
+				<if test="userId != null and userId != '' ">
+					USER_ID = #{userId} ,
+				</if>
+			
+				<if test="isRemoved != null">
+					IS_REMOVED = #{isRemoved} ,
+				</if>
+			
+				<if test="phone != null and phone != '' ">
+					PHONE = #{phone} ,
+				</if>
+			
+				<if test="loginName != null and loginName != '' ">
+					LOGIN_NAME = #{loginName} 
+				</if>
+			
+		</set>
+        WHERE 
+	        ID = #{id} 
+    </update>
+
+
+    <delete id="deleteByPK" parameterType="com.whd.news.user.bean.LoginUser" >
+        DELETE FROM LOGIN_USER WHERE
+	        ID = #{id} 
+    </delete>
+
+  	
+</mapper>
